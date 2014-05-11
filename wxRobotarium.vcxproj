@@ -18,7 +18,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -38,14 +38,20 @@
     <Import Project="Paths.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)bin\$(Configuration)\</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(OGRE_ROOT)include;$(OGRE_ROOT)include\OIS;$(OGRE_ROOT)include\OGRE;$(OGRE_ROOT)Samples\Common\include;$(BOOST_ROOT);$(BULLET_ROOT)\src\;$(BULLET_ROOT)\Extras\ConvexDecomposition;$(BULLET_ROOT)\src\BulletDynamics;$(BULLET_ROOT)\src\BulletCollision;$(ROBOTARIUM_ROOT)extlibs\btOgre\include;$(ROBOTARIUM_ROOT)src;$(WX_ROOT)include;$(WX_ROOT)include/msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OGRE_ROOT)\lib\$(Configuration);$(OGRE_ROOT)\boost\lib;$(BULLET_ROOT)\lib;$(BOOST_ROOT)bin.v2\libs\thread\build\msvc-10.0\release\link-static\threading-multi;$(WX_ROOT)lib/vc_lib;D:\dev\Robotarium\bin\$(Configuration)\</AdditionalLibraryDirectories>
+      <OutputFile>$(ProjectDir)bin/$(Configuration)/$(ProjectName)$(TargetExt)</OutputFile>
+      <AdditionalDependencies>BulletCollision_vs2010_debug.lib;BulletDynamics_vs2010_debug.lib;BulletSoftBody_vs2010_debug.lib;ConvexDecomposition_vs2010_debug.lib;LinearMath_vs2010_debug.lib;OgreMain_d.lib;Robotarium.lib;wxmsw30ud_core.lib;wxbase30ud.lib;wxtiffd.lib;wxjpegd.lib;wxpng.lib;wxzlib.lib;wxregexu.lib;wxexpat.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -67,7 +73,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\CameraDialog.cpp" />
+    <ClCompile Include="src\CameraFrame.cpp" />
+    <ClCompile Include="src\GraphicNodeDialog.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MainWindow.cpp" />
+    <ClCompile Include="src\NodeViewer.cpp" />
+    <ClCompile Include="src\PropertyGrid.cpp" />
+    <ClCompile Include="src\PropertySet.cpp" />
+    <ClCompile Include="src\SceneNodeDialog.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\CameraDialog.hpp" />
+    <ClInclude Include="src\CameraFrame.hpp" />
+    <ClInclude Include="src\GraphicNodeDialog.hpp" />
+    <ClInclude Include="src\MainWindow.hpp" />
+    <ClInclude Include="src\NodeViewer.hpp" />
+    <ClInclude Include="src\PropertyGrid.hpp" />
+    <ClInclude Include="src\PropertySet.hpp" />
+    <ClInclude Include="src\SceneNodeDialog.hpp" />
+    <ClInclude Include="src\wxDefs.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
